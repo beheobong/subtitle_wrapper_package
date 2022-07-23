@@ -1,0 +1,43 @@
+name: Test and publish package 🎁
+on:
+  release:
+    types:
+      - created
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v2
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.0.1
+          channel: "stable"
+          cache: true
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+      - name: ✨ Check Formatting
+        run: flutter format --set-exit-if-changed lib test example
+      - name: 🕵️ Analyze
+        run: flutter analyze lib test example
+      - name: 🧪 Run Tests
+        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
+
+      - name: 📊 Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v1
+        with:
+        # TODO (Joran-Dob), improve code coverage
+          min_coverage: 50
+          path: coverage/lcov.info
+      - name: 🚀 Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: coverage/lcov.info
+      - name: Publish
+        uses: sakebook/actions-flutter-pub-publisher@v1.4.0
+        with:
+          credential: ${{ secrets.PUBSPEC_CREDENTIALS }}
+          flutter_package: true
+          skip_test: true
+          dry_run: false🎁
