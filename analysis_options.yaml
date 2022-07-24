@@ -13,7 +13,7 @@ analyzer:
     dead_code: warning
     deprecated_member_use_from_same_package: info
     deprecated_member_use: info
-    missing_@required_param: error
+    missing_required_param: error
     missing_return: error
     todo: info
     unused_catch_clause: error
