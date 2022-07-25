@@ -70,7 +70,7 @@ class SubtitleTextView extends StatelessWidget {
                     ),
                 ],
               )
-            : Container();
+            : const SizedBox.shrink();
       },
     );
   }

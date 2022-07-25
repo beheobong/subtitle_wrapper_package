@@ -4,7 +4,7 @@ import 'package:subtitle_wrapper_package/bloc/subtitle/subtitle_bloc.dart';
 class SubtitleController {
   String subtitlesContent;
   String subtitleUrl;
-  final bool showSubtitles;
+  bool showSubtitles;
   SubtitleDecoder subtitleDecoder;
   SubtitleType subtitleType;
   //
@@ -41,6 +41,12 @@ class SubtitleController {
       );
     } else {
       throw Exception('Seems that the controller is not correctly attached.');
+    }
+  }
+
+  void toggleSubtitles(bool value) {
+    if (value != null) {
+      showSubtitles = value;
     }
   }
 

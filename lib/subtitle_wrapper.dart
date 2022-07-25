@@ -52,7 +52,7 @@ class SubtitleWrapper extends StatelessWidget {
             ),
           )
         else
-          Container(),
+          const SizedBox.shrink(),
       ],
     );
   }
